@@ -25,15 +25,12 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
     checkStyleRunAnalysis: true
+  displayName: 'Build with Maven'
 
-  - task: PublishPipelineArtifact@1
-    inputs:
-      targetPath: '$(Pipeline.Workspace)/target/'
-      artifact: 'Maven Build Output'
-      
-  displayName: 'Build with Maven, upload jarfile.'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/target/'
+    artifact: 'Maven Output'
+  displayName: 'Upload Artifacts'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+
