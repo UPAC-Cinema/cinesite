@@ -11,7 +11,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
+- script: echo Starting MVN build...
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -25,7 +25,13 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
     checkStyleRunAnalysis: true
-  displayName: 'Run a one-line script'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Pipeline.Workspace)/target/'
+      artifact: 'Maven Build Output'
+      
+  displayName: 'Build with Maven, upload jarfile.'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
